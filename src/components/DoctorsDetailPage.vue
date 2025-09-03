@@ -23,7 +23,7 @@ function toggleShowDoctorId() {
       <div class="text-2xl font-bold pb-10">Doctor Details</div>
 
       <form class="grid gap-4 w-full">
-        <div class="space-y-4">
+        <div class="">
           <label class="grid w-full">
             <span class="pb-1 font-light opacity-60">Doctor ID</span>
             <div class="flex items-center gap-2 relative w-full">
@@ -52,7 +52,7 @@ function toggleShowDoctorId() {
               </button>
             </div>
           </label>
-          <div class="gap-2 items-center md:hidden flex">
+          <div class="gap-2 items-center md:hidden flex pt-4">
             <input
               id="viewId"
               type="checkbox"
