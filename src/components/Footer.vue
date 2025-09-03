@@ -3,8 +3,8 @@ import ThemeButton from './ThemeButton.vue'
 </script>
 
 <template>
-  <footer id="footer" class="p-6 w-full bg-base-200 flex justify-between">
-    <p class="font-bold text-xl">Doctors MD</p>
+  <footer id="footer" class="p-6 w-full flex justify-between dark:text-white">
+    <p class="font-bold md:text-4xl">Doctors MD</p>
     <ThemeButton />
   </footer>
 </template>

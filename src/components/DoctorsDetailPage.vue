@@ -59,18 +59,18 @@ onMounted(async () => {
     {{ errorMessage }}
   </div>
   <div v-else class="p-6">
-    <div class="bg-base-200 md:p-6 p-4 card shadow-sm">
+    <div class="bg-white dark:bg-[#084448] md:p-10 p-6 card shadow-sm dark:text-white">
       <div class="text-2xl font-bold pb-10">Doctor Details</div>
 
       <form class="grid gap-4 w-full">
         <div class="">
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">Doctor ID</span>
+            <span class="pb-1 font-bold">Doctor ID</span>
             <div class="flex items-center gap-2 relative w-full">
               <input
-                class="bg-base-100 rounded-lg p-4 outline-0 w-full"
+                class="bg-[#FBFBFB] dark:bg-[#063437] rounded-lg p-4 outline-0 w-full"
                 type="text"
-                :value="maskedDoctorId"
+                :value="'ID: ' + maskedDoctorId"
                 readonly
               />
               <button
@@ -106,18 +106,18 @@ onMounted(async () => {
 
         <div class="md:flex grid gap-6">
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">First Name</span>
+            <span class="pb-1 font-bold">First Name</span>
             <input
-              class="bg-base-100 rounded-lg p-4 outline-0"
+              class="bg-[#FBFBFB] dark:bg-[#063437] rounded-lg p-4 outline-0"
               type="text"
               :value="doctorDetails?.firstName"
               readonly
             />
           </label>
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">Last Name</span>
+            <span class="pb-1 font-bold">Last Name</span>
             <input
-              class="bg-base-100 rounded-lg p-4 outline-0"
+              class="bg-[#FBFBFB] dark:bg-[#063437] rounded-lg p-4 outline-0"
               type="text"
               :value="doctorDetails?.lastName"
               readonly
@@ -127,18 +127,18 @@ onMounted(async () => {
 
         <div class="md:flex grid gap-6">
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">State</span>
+            <span class="pb-1 font-bold">State</span>
             <input
-              class="bg-base-100 rounded-lg p-4 outline-0"
+              class="bg-[#FBFBFB] dark:bg-[#063437] rounded-lg p-4 outline-0"
               type="text"
               :value="doctorDetails?.state"
               readonly
             />
           </label>
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">Date of Birth</span>
+            <span class="pb-1 font-bold">Date of Birth</span>
             <input
-              class="bg-base-100 rounded-lg p-4 outline-0"
+              class="bg-[#FBFBFB] dark:bg-[#063437] rounded-lg p-4 outline-0"
               type="text"
               :value="doctorDetails?.dob ? moment(doctorDetails?.dob).format('MMMM DD, YYYY') : ''"
               readonly
@@ -148,19 +148,19 @@ onMounted(async () => {
 
         <div class="md:flex grid gap-6">
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">License</span>
-            <div class="rounded-lg p-4 outline-0 bg-base-100">
+            <span class="pb-1 font-bold">License</span>
+            <div class="rounded-lg p-4 outline-0 bg-[#FBFBFB] dark:bg-[#063437]">
               <div
-                class="badge badge-soft"
+                class="badge badge-outline font-bold"
                 :class="doctorDetails?.licenseActive ? 'badge-success' : 'badge-error'"
                 v-text="doctorDetails?.licenseActive ? 'Active' : 'Inactive'"
               ></div>
             </div>
           </label>
           <label class="grid w-full">
-            <span class="pb-1 font-light opacity-60">Signed Up Date</span>
+            <span class="pb-1 font-bold">Signed Up Date</span>
             <input
-              class="bg-base-100 rounded-lg p-4 outline-0"
+              class="bg-[#FBFBFB] dark:bg-[#063437] rounded-lg p-4 outline-0"
               type="text"
               :value="
                 doctorDetails?.signedUpDate

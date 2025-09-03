@@ -3,19 +3,19 @@ import { theme, toggleTheme } from '@/stores/themeStore'
 </script>
 
 <template>
-  <label class="swap swap-rotate">
+  <label class="swap swap-rotate" style="background-color: transparent !important">
     <!-- this hidden checkbox controls the state -->
     <input
       type="checkbox"
       class="theme-controller"
       value="synthwave"
-      :checked="theme === 'dark'"
+      :checked="theme === 'dim'"
       @change="toggleTheme"
     />
 
     <!-- sun icon -->
     <svg
-      class="swap-off size-5 fill-current"
+      class="swap-on md:size-10 size-5 fill-current"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
@@ -26,7 +26,7 @@ import { theme, toggleTheme } from '@/stores/themeStore'
 
     <!-- moon icon -->
     <svg
-      class="swap-on h-5 w-5 fill-current"
+      class="swap-off md:size-10 size-5 fill-current"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >

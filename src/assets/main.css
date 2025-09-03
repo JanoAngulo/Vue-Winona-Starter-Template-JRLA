@@ -1,6 +1,31 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, dim;
+  themes:
+    light --default,
+    emerald,
+    dark --prefersdark,
+    dim;
 }
 
 @custom-variant dark (&:where([data-theme=dim], [data-theme=dim] *));
+
+:root {
+  --font-sans:
+    'Quicksand', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial;
+}
+
+html,
+body,
+#app {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.quicksand {
+  font-family: 'Quicksand', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
