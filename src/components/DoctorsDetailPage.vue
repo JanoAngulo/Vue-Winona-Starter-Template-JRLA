@@ -1,24 +1,64 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import type { Doctor } from '@/stores/interfaceStore'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import moment from 'moment'
 
+let doctorDetails = ref<Doctor | null>(null)
 const route = useRoute()
-const doctorDetails = route?.query
-
 const showDoctorId = ref(false)
+const errorMessage = ref('')
 
 const maskedDoctorId = computed(() => {
-  const id = doctorDetails?.id?.toLocaleString() || ''
+  const id = doctorDetails.value?.id?.toLocaleString() || ''
   return showDoctorId.value ? id : id.replace(/[^-](?=[^-]*[-]*.{12})/g, '*')
 })
 
 function toggleShowDoctorId() {
   showDoctorId.value = !showDoctorId.value
 }
+
+const fetchResources = async () => {
+  const url = '/api'
+  const accessToken = 'dGhpcyBpcyBzdXBlciBzYWZlLiBqdXN0IHRydXN0IG1lLiBoZWhl'
+
+  try {
+    if (!route?.query?.id) {
+      throw new Error(`Doctor ID doesn't seem to exist.`)
+    }
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    if (!res.ok) {
+      if (res.status === 401) {
+        throw new Error('Unauthorized access. Please log in again.')
+      } else {
+        throw new Error(`Error: ${res.status} ${res.statusText}`)
+      }
+    }
+
+    const json = await res.json()
+    doctorDetails.value = json.find((doctor: Doctor) => doctor.id === route.query.id) || null
+  } catch (error: any) {
+    errorMessage.value = error.message
+    console.error(errorMessage)
+  }
+}
+
+onMounted(async () => {
+  await fetchResources()
+})
 </script>
 
 <template>
-  <div class="p-6">
+  <div v-if="errorMessage" class="text-2xl w-full text-center h-[50vh] grid place-content-center">
+    {{ errorMessage }}
+  </div>
+  <div v-else class="p-6">
     <div class="bg-base-200 md:p-6 p-4 card shadow-sm">
       <div class="text-2xl font-bold pb-10">Doctor Details</div>
 
@@ -100,7 +140,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails?.dob"
+              :value="doctorDetails?.dob ? moment(doctorDetails?.dob).format('MMMM DD, YYYY') : ''"
               readonly
             />
           </label>
@@ -109,19 +149,24 @@ function toggleShowDoctorId() {
         <div class="md:flex grid gap-6">
           <label class="grid w-full">
             <span class="pb-1 font-light opacity-60">License</span>
-            <input
-              class="bg-base-100 rounded-lg p-4 outline-0"
-              type="text"
-              :value="doctorDetails?.licenseActive === 'false' ? 'Inactive' : 'Active'"
-              readonly
-            />
+            <div class="rounded-lg p-4 outline-0 bg-base-100">
+              <div
+                class="badge badge-soft"
+                :class="doctorDetails?.licenseActive ? 'badge-success' : 'badge-error'"
+                v-text="doctorDetails?.licenseActive ? 'Active' : 'Inactive'"
+              ></div>
+            </div>
           </label>
           <label class="grid w-full">
             <span class="pb-1 font-light opacity-60">Signed Up Date</span>
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails?.signedUpDate"
+              :value="
+                doctorDetails?.signedUpDate
+                  ? moment(doctorDetails?.signedUpDate).format('MMMM DD, YYYY')
+                  : ''
+              "
               readonly
             />
           </label>

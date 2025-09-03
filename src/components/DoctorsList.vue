@@ -1,15 +1,6 @@
 <script setup lang="ts">
+import type { Doctor } from '@/stores/interfaceStore'
 import { useRouter } from 'vue-router'
-
-interface Doctor {
-  id: string
-  firstName: string
-  lastName: string
-  state: string
-  dob?: string
-  licenseActive?: string
-  signedUpDate?: string
-}
 
 const props = defineProps({
   doctorsList: Array as () => Doctor[],
@@ -20,7 +11,7 @@ const router = useRouter()
 function openDoctorDetails(doctor: Doctor) {
   router.push({
     name: 'DoctorDetailsPage',
-    query: { ...doctor },
+    query: { id:doctor.id },
   })
 }
 </script>

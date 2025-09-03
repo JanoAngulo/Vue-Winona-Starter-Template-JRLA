@@ -19,17 +19,16 @@ const fetchResources = async () => {
 
     if (!res.ok) {
       if (res.status === 401) {
-        errorMessage.value = 'Unauthorized access. Please log in again.'
+        throw new Error('Unauthorized access. Please log in again.')
       } else {
-        errorMessage.value = `Error: ${res.status} ${res.statusText}`
+        throw new Error(`Error: ${res.status} ${res.statusText}`)
       }
-      return
     }
 
     const json = await res.json()
     doctorsList.value = json
-  } catch (error) {
-    errorMessage.value = 'An unexpected error occurred. Please try again later.'
+  } catch (error: any) {
+    errorMessage.value = error.message
     console.error(error)
   }
 }

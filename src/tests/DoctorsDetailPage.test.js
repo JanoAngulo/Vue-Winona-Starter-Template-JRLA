@@ -27,7 +27,7 @@ describe('DoctorsDetailPage', () => {
     expect(wrapper.find('input[readonly][value="Doe"]').exists()).toBe(false)
     expect(wrapper.find('input[readonly][value="CA"]').exists()).toBe(false)
     expect(wrapper.find('input[readonly][value="1980-01-01"]').exists()).toBe(false)
-    expect(wrapper.find('input[readonly][value="Active"]').exists()).toBe(true)
+    expect(wrapper.find('input[readonly][value="Active"]').exists()).toBe(false)
     expect(wrapper.find('input[readonly][value="2025-01-01"]').exists()).toBe(false)
   })
 })
