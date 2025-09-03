@@ -3,12 +3,12 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const doctorDetails = route.query
+const doctorDetails = route?.query
 
 const showDoctorId = ref(false)
 
 const maskedDoctorId = computed(() => {
-  const id = doctorDetails.id?.toLocaleString() || ''
+  const id = doctorDetails?.id?.toLocaleString() || ''
   return showDoctorId.value ? id : id.replace(/[^-](?=[^-]*[-]*.{12})/g, '*')
 })
 
@@ -70,7 +70,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails.firstName"
+              :value="doctorDetails?.firstName"
               readonly
             />
           </label>
@@ -79,7 +79,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails.lastName"
+              :value="doctorDetails?.lastName"
               readonly
             />
           </label>
@@ -91,7 +91,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails.state"
+              :value="doctorDetails?.state"
               readonly
             />
           </label>
@@ -100,7 +100,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails.dob"
+              :value="doctorDetails?.dob"
               readonly
             />
           </label>
@@ -112,7 +112,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails.licenseActive === 'false' ? 'Inactive' : 'Active'"
+              :value="doctorDetails?.licenseActive === 'false' ? 'Inactive' : 'Active'"
               readonly
             />
           </label>
@@ -121,7 +121,7 @@ function toggleShowDoctorId() {
             <input
               class="bg-base-100 rounded-lg p-4 outline-0"
               type="text"
-              :value="doctorDetails.signedUpDate"
+              :value="doctorDetails?.signedUpDate"
               readonly
             />
           </label>

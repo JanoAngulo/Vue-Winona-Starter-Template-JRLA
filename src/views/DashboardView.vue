@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import DoctorsList from '@/components/DoctorsList.vue'
+import DoctorsList from '../components/DoctorsList.vue'
 
 const doctorsList = ref([])
 const errorMessage = ref('')
